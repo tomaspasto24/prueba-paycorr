@@ -1,0 +1,38 @@
+<div>
+    <div class="header">
+        <h1>
+            Noticias del día actual
+        </h1>
+        <button mat-icon-button (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="isLoading" class="loading-indicator">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && newsList.length > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Imagen</th>
+                    <th>Número de Palabras</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let news of newsList">
+                    <td>{{ news.title }}</td>
+                    <td><img [src]="news.imageUrl" alt="News Image" /></td>
+                    <td>{{ news.wordCount }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="!isLoading && newsList.length === 0 && errorMessage === ''">
+        No se encontraron noticias.
+    </div>
+
+    <div *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>

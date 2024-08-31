@@ -1,0 +1,122 @@
+.loading-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+td img {
+    max-width: 100px;
+    height: auto;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+div {
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+}
+
+div.no-news {
+    color: #555;
+}
+
+div.error-message {
+    color: #d9534f;
+
+    font-weight: bold;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #02b9a9;
+
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    color: white;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header button {
+    background-color: white;
+
+    color: #02b9a9;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header button mat-icon {
+    font-size: 24px;
+}
+
+.header button:hover {
+    background-color: #02b9a9;
+
+    color: white;
+}
+
+.header button:focus {
+    outline: none;
+
+    box-shadow: 0 0 0 4px rgb(255, 255, 255, 0.2);
+}
+
+.mat-icon {
+    height: 20px;
+    width: 22px;
+}
