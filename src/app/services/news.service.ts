@@ -11,7 +11,7 @@ export class NewsService {
   getNews(): Promise<any> {
     const params = new URLSearchParams({
       'api-key': this.apiKey,
-      'fl': 'headline,word_count,multimedia',
+      'fl': 'headline,word_count,multimedia, web_url',
       'begin_date': this.getCurrentDate()
     });
 
@@ -32,7 +32,8 @@ export class NewsService {
       return {
         title: article.headline.main,
         imageUrl: internet ? this.getImageUrl(article.multimedia) : 'https://media.istockphoto.com/id/1336657186/vector/no-wi-fi-flat-vector.jpg?s=612x612&w=0&k=20&c=HbcdNJXVwQl3UhnENheZy0VXLXVrPDebCWD9aBHVDJM=',
-        wordCount: article.word_count
+        wordCount: article.word_count,
+        webUrl: article.web_url
       };
     });
   }

@@ -22,7 +22,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let news of newsList">
-                    <td>{{ news.title }}</td>
+                    <td>
+                        <a href="{{news.webUrl}}">
+                            {{ news.title }}
+                        </a>
+                    </td>
                     <td><img [src]="news.imageUrl" alt="News Image" /></td>
                     <td>{{ news.wordCount }}</td>
                 </tr>
