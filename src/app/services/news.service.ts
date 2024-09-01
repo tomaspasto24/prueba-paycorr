@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class NewsService {
   private apiUrl: string = 'https://api.nytimes.com/svc/search/v2/articlesearch.json';
   private apiKey: string = 'OTzT1kPx2CTY2tk0lzL1AKRuXQBt0hj0';
-  private localStorageKey: string = 'newsData';
+  private localStorageKey: string = 'nyt-articles';
 
   constructor() { }
 
@@ -18,12 +18,13 @@ export class NewsService {
     return fetch(`${this.apiUrl}?${params.toString()}`)
       .then(response => response.json())
       .then(data => {
+        if (data.fault) throw new Error(data.fault.faultstring);
         this.saveToLocalStorage(data);
         return this.transformNewsData(data);
       })
       .catch(error => {
         console.error('Error al obtener las noticias:', error);
-        return this.getFromLocalStorage(); 
+        return this.getFromLocalStorage();
       });
   }
 
@@ -47,6 +48,9 @@ export class NewsService {
   }
 
   private getImageUrl(multimedia: any[]): string {
+    if (multimedia.length === 0) {
+      return 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg';
+    }
     const imageBaseUrl = 'http://www.nytimes.com/';
     const image = multimedia.find(media => media.subtype === 'thumbnail');
     return image ? imageBaseUrl + image.url : '';

@@ -118,5 +118,9 @@ body {
 
 .mat-icon {
     height: 20px;
-    width: 22px;
+    width: 24px;
+}
+
+tr {
+    cursor: pointer;
 }

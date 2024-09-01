@@ -14,18 +14,16 @@
     <div *ngIf="!isLoading && newsList.length > 0">
         <table>
             <thead>
-                <tr>
+                <tr>    
                     <th>Título</th>
                     <th>Imagen</th>
                     <th>Número de Palabras</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let news of newsList">
+                <tr *ngFor="let news of newsList" (click)="openNewsInNewTab(news.webUrl)">
                     <td>
-                        <a href="{{news.webUrl}}">
-                            {{ news.title }}
-                        </a>
+                        {{ news.title }}
                     </td>
                     <td><img [src]="news.imageUrl" alt="News Image" /></td>
                     <td>{{ news.wordCount }}</td>

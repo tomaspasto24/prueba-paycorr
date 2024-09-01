@@ -32,16 +32,19 @@ export class NewsComponent implements OnInit {
     this.fetchNews();
   }
 
+  openNewsInNewTab(url: string) {
+    window.open(url, '_blank');
+  }
+
   private fetchNews(): void {
     this.isLoading = true;
     this.newsService.getNews()
       .then((news) => {
-        console.log('Noticias cargadas exitosamente');
         this.newsList = news;
         this.isLoading = false;
       })
       .catch((error) => {
-        this.errorMessage = 'Error al cargar las noticias';
+        this.errorMessage = 'Error al cargar las noticias' + error;
         this.isLoading = false;
       });
   }
