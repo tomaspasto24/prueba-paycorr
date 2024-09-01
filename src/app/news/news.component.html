@@ -37,4 +37,9 @@
     </div>
 
     <div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+    <div *ngIf="!isLoading" class="pagination">
+        <button mat-raised-button (click)="goToPreviousPage()" [disabled]="currentPage === 0">Anterior</button>
+        <button mat-raised-button (click)="goToNextPage()" [disabled]="newsList.length < 10">Siguiente</button>
+    </div>
 </div>

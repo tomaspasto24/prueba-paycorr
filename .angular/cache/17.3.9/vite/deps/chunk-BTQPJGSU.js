@@ -4476,6 +4476,10 @@ var _MatInternalFormField = __MatInternalFormField;
 })();
 
 export {
-  MatCommonModule
+  Platform,
+  FocusMonitor,
+  MatCommonModule,
+  MatRippleModule,
+  MatRippleLoader
 };
-//# sourceMappingURL=chunk-NNRIWXL7.js.map
+//# sourceMappingURL=chunk-BTQPJGSU.js.map

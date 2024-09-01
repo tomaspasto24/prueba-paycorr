@@ -8,23 +8,25 @@ export class NewsService {
 
   constructor() { }
 
-  getNews(): Promise<any> {
+  getNews(page: number = 0): Promise<any> {
     const params = new URLSearchParams({
       'api-key': this.apiKey,
-      'fl': 'headline,word_count,multimedia, web_url',
-      'begin_date': this.getCurrentDate()
+      'fl': 'headline,word_count,multimedia,web_url',
+      'begin_date': this.getCurrentDate(),
+      'page': page.toString()
     });
 
     return fetch(`${this.apiUrl}?${params.toString()}`)
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         if (data.fault) throw new Error(data.fault.faultstring);
-        this.saveToLocalStorage(data);
+        this.saveToLocalStorage(data, page);
         return this.transformNewsData(data);
       })
       .catch(error => {
         console.error('Error al obtener las noticias:', error);
-        return this.getFromLocalStorage();
+        return this.getFromLocalStorage(page);
       });
   }
 
@@ -56,14 +58,16 @@ export class NewsService {
     return image ? imageBaseUrl + image.url : '';
   }
 
-  private saveToLocalStorage(data: any): void {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(data));
+  private saveToLocalStorage(data: any, page: number): void {
+    const savedData = JSON.parse(localStorage.getItem(this.localStorageKey) as string) || {};
+    savedData[page] = data;
+    localStorage.setItem(this.localStorageKey, JSON.stringify(savedData));
   }
 
-  private getFromLocalStorage(): any[] {
-    const data = localStorage.getItem(this.localStorageKey);
-    if (data) {
-      return this.transformNewsData(JSON.parse(data), false);
+  private getFromLocalStorage(page: number): any[] {
+    const savedData = JSON.parse(localStorage.getItem(this.localStorageKey) as string);
+    if (savedData && savedData[page]) {
+      return this.transformNewsData(savedData[page], false);
     }
     return [];
   }
